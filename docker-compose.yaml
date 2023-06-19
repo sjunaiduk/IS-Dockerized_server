@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  insurgency-sandstorm:
+    image: sv-2:1.0
+    container_name: insurgency-sandstorm
+    restart: unless-stopped
+    env_file:
+       - .env
+    volumes:
+      - ./config/ini:/home/steam/steamcmd/sandstorm/Insurgency/Saved/Config/LinuxServer:ro
+      - ./config/txt:/home/steam/steamcmd/sandstorm/Insurgency/Config/Server:ro
+      - ./mod:/home/steam/steamcmd/sandstorm/Insurgency/Mods:rw
+    ports:
+      - "12345:12345/udp"
+      - "12344:12344/udp"
+    environment:
+      - HOSTNAME=Insurgency Sandstorm Server
+      - LAUNCH_SCENARIO=Canyon?Scenario=Scenario_Crossing_Skirmish
+      - MAX_PLAYERS=8
+      - PORT=12345
+      - QUERYPORT=12344
+      - PASSWORD=secret
